@@ -1,19 +1,19 @@
-#! /usr/bin/env node
+#!/usr/bin/env node
 
 'use strict';
 
-var fs = require('fs');
-var i18nGenerator = require('./index');
+const fs = require('fs');
+const i18nGenerator = require('./index');
 
-var userArgs = process.argv;
-var inputFileParam = userArgs[2];
-var outputFileParam = userArgs[3];
+const userArgs = process.argv;
+const inputFileParam = userArgs[2];
+const outputFileParam = userArgs[3];
 
 if (userArgs.indexOf('-h') !== -1 || userArgs.indexOf('--help') !== -1) {
     return console.log(`
-    i18n <input file> <output path> --watch
+    i18n input_file output_path --watch
 
-    example :
+    examples:
     i18n input.txt output
     i18n input.csv output
     i18n input.txt output --watch
@@ -26,8 +26,8 @@ if (userArgs.indexOf('-v') !== -1 || userArgs.indexOf('--version') !== -1) {
     return console.log(require('./package').version);
 }
 
-var filetype = 'pipe';
-switch (inputFileParam.match(/(.*)(?:\.([^.]+$))/)[2]) {
+let filetype = 'pipe';
+switch (inputFileParam.match(/(.*)\.([^.]+$)/)[2]) {
     case 'csv': {
         filetype = 'csv';
         break;
@@ -42,9 +42,9 @@ switch (inputFileParam.match(/(.*)(?:\.([^.]+$))/)[2]) {
 if (userArgs.indexOf('--watch') !== -1) {
     fs.watch(inputFileParam, function () {
         console.log('file ' + inputFileParam + ' changed!');
-        i18nGenerator(inputFileParam, outputFileParam, false, filetype);
+        i18nGenerator(inputFileParam, outputFileParam, filetype);
     });
 } else {
     // i18n test/input.txt test/temp
-    i18nGenerator(inputFileParam, outputFileParam, false, filetype);
+    i18nGenerator(inputFileParam, outputFileParam, filetype);
 }

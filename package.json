@@ -18,8 +18,7 @@
   },
   "scripts": {
     "test": "jest",
-    "coverage": "jest --coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
-    "browser": "browserify index.js > browser.js"
+    "coverage": "jest --coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
   },
   "license": "MIT",
   "preferGlobal": true,
@@ -31,10 +30,8 @@
     "localization"
   ],
   "dependencies": {
-    "js-beautify": "^1.10.2"
   },
   "devDependencies": {
-    "browserify": "^17.0.0",
     "jest": "^26.4.0"
   }
 }
