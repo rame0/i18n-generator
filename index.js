@@ -114,7 +114,7 @@ function i18nGenerating(data) {
 
     // <= (nestEnd)
     if (output[0].indexOf(constiableName.nestEnd) !== -1) {
-        constiable.nestObject = [];
+        constiable.nestObject.pop();
         return;
     }
 
